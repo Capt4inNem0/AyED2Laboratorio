@@ -12,15 +12,24 @@ struct max_min_result {
     unsigned int min_position;
 };
 
-struct max_min_result compute_max_min(int array[], unsigned int length)
-{
+struct max_min_result compute_max_min(int array[], unsigned int length) {
     assert(length > 0);
-    array = array;
     struct max_min_result result = { 0, 0, 0, 0 };
-    result.max_value = 2;
-    result.min_value = 2;
+    result.max_value = array[0];
+    result.min_value = array[0];
 
-    // IMPLEMENTAR
+    unsigned int i = 0;
+    while(i < length){
+	if(array[i] < result.min_value){
+	    result.min_value = array[i];
+	    result.min_position = i;
+	}
+	if(array[i] > result.max_value){
+	    result.max_value = array[i];
+	    result.max_position = i;
+	}
+	i = i+1;
+    }
 
     return result;
 }
@@ -29,6 +38,12 @@ int main(void)
 {
     int array[ARRAY_SIZE] = { 4, -1, 5, 8, 9, 0, 3, 6, 0, 0 };
 
+    int i = 0;
+    while(i < ARRAY_SIZE){
+	printf("Ingrese un numero entero: ");
+	scanf("%d", &array[i]);
+	i=i+1;
+    }
     // PEDIR AL USUARIO QUE INGRESE LOS ELEMENTOS DEL ARREGLO.
 
     struct max_min_result result = compute_max_min(array, ARRAY_SIZE);
@@ -38,4 +53,3 @@ int main(void)
     printf("Posición del mínimo: %u\n", result.min_position);
     return 0;
 }
-
